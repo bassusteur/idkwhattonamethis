@@ -1,14 +1,7 @@
 #include <stdio.h>
-#include <time.h>
 
-#define GRID 10
+#define GRID 20
 #define GRIDD (GRID*GRID)
-
-struct px
-{
-    int index;
-    char *val;
-} pxs[GRID][GRID];
 
 void cls(){
     #if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
@@ -20,7 +13,13 @@ void cls(){
     #endif
 }
 
-struct px init() 
+struct px
+{
+    int index;
+    char *val;
+} pxs[GRID][GRID];
+
+struct px init()
 {
     for(int i=0; i<GRID; i++)
     {
@@ -33,11 +32,9 @@ struct px init()
     return pxs[GRID][GRID];
 }
 
-
 struct px set(int x, int y, char *value) 
 {
     pxs[x][y].val = value;
-
     return pxs[GRID][GRID];
 }
 
@@ -47,41 +44,33 @@ char get(int x, int y)
     return get;
 }
 
-int main()
+struct px display()
 {
-    //time_t t;
-    //srand((unsigned) time(&t));
-
-    init();
-    
-    /*
-    for(int x=0; x<GRID; x++)
+    for(int a=0; a<GRID; a++)
     {
-        for(int y=0; y<GRID; y++)
+        printf("\n");
+        for(int b=0; b<GRID; b++)
         {
-            printf("pxs: %d %d - i: %d - char: %s\n",x,y,pxs[x][y].index,pxs[x][y].val);
+            printf("%s ", pxs[a][b].val);
         }
     }
-    */
-    set(1,1,"C");
-    set(1,2,"u");
-    set(1,3,"n");
-    set(1,4,"t");
+    printf("\n");
+}
 
-    set(3,1,"t");
-    set(3,2,"o");
-    set(3,3,"5");
+int main()
+{
+
+    init();
+
+    for(int i=0; i<GRID; i++)
+    {
+        char *value[20] = '0';
+        value = i;
+        set(0,0,value);
+    }
 
     while(1){
-        for(int a=0; a<GRID; a++)
-        {
-            printf("\n");
-            for(int b=0; b<GRID; b++)
-            {
-                printf("%s ", pxs[a][b].val);
-            }
-        }
-        printf("\n");
+        display();
         cls();
     }
 
